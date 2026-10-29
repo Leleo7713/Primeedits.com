@@ -5,156 +5,179 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>Painel | Prime Edits</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--panel:#0A1112;--p2:#0E1819;--line:#16302A;--ink:#EAF5F0;--muted:#8FA59D;--g:#1FE58E;--y:#FFD21F;--red:#ff6b6b;--f:"Manrope","Segoe UI",system-ui,sans-serif;color-scheme:dark}
+:root{--bg:#040807;--p:#0a1213;--p2:#0f1b1c;--line:#173029;--ink:#eaf5f0;--mut:#8fa59d;--g:#1fe58e;--y:#ffd21f;--r:#ff6b6b;--f:"Manrope","Segoe UI",system-ui,sans-serif;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 .95rem/1.5 var(--f);padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
-button{font:inherit;cursor:pointer}
-.wrap{width:min(1000px,100% - 2rem);margin:0 auto}
-header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(0,0,0,.92);z-index:5}
-.bar{display:flex;align-items:center;gap:1rem;height:60px}
-.bar b{color:var(--g);font-size:1.1rem;flex:1}.bar small{color:var(--muted)}
-.btn{background:var(--g);color:#04140C;border:0;border-radius:8px;padding:.5rem .95rem;font-weight:700}
-.btn.d{background:var(--p2);color:var(--ink);border:1px solid var(--line)}
-.btn.r{background:#2a1010;color:var(--red);border:1px solid #5a2a2a}
-.btn.s{padding:.3rem .7rem;font-size:.82rem}
-.btn:disabled{opacity:.5}
-nav{display:flex;gap:.4rem;margin:1.2rem 0;flex-wrap:wrap}
-nav button{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:.5rem 1.1rem;font-weight:600}
-nav button.on{background:var(--g);color:#04140C;border-color:var(--g)}
-nav i{font-style:normal;background:var(--y);color:#1a1400;border-radius:99px;padding:0 .45rem;margin-left:.4rem;font-size:.75rem}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-bottom:1.2rem}
-.st{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.9rem}
-.st small{color:var(--muted);display:block}.st b{font-size:1.35rem;color:var(--y)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem;margin-bottom:.8rem}
-.row{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;align-items:center}
-.muted{color:var(--muted);font-size:.82rem}
-.tag{border-radius:99px;padding:.1rem .65rem;font-size:.78rem;font-weight:600}
-.pending{background:rgba(255,210,31,.15);color:var(--y)}.paid{background:rgba(31,229,142,.14);color:var(--g)}.rejected{background:rgba(255,90,90,.15);color:var(--red)}
-.it{display:flex;justify-content:space-between;padding:.15rem 0}
-.acts{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
-label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.7rem}
-input,textarea,select{width:100%;margin-top:.25rem;background:var(--p2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:.6rem .75rem;font:inherit}
+body{margin:0;background:radial-gradient(900px 400px at 50% -10%,rgba(31,229,142,.08),transparent),var(--bg);color:var(--ink);font:500 .94rem/1.5 var(--f);padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.wrap{width:min(1120px,100% - 2rem);margin:0 auto}
+header{background:rgba(4,8,7,.96);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.bar{display:flex;align-items:center;gap:.8rem;height:64px}
+.logo{font-weight:800;font-size:1.15rem;color:var(--g);flex:1;letter-spacing:.2px}.logo span{color:var(--ink)}
+.who{color:var(--mut);font-size:.82rem;max-width:40vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b{height:40px;padding:0 1rem;border-radius:10px;border:1px solid var(--line);background:var(--p2);color:var(--ink);font:700 .86rem var(--f);display:inline-flex;align-items:center;justify-content:center;gap:.4rem;text-decoration:none;cursor:pointer;flex:1 1 120px;transition:.15s}
+.b:hover{border-color:var(--g);transform:translateY(-1px)}.b:disabled{opacity:.5}
+.b.ok{background:var(--g);border-color:var(--g);color:#04140c}.b.ok:hover{filter:brightness(1.08)}
+.b.no{background:#1c0f10;border-color:#5a2a2a;color:var(--r)}.b.no:hover{border-color:var(--r)}
+.b.wa{background:#0b1f18;border-color:#1d5a42;color:var(--g)}
+.b.ic{flex:0 0 40px;padding:0;color:var(--mut)}.b.ic:hover{color:var(--r);border-color:var(--r)}
+.b.sm{flex:none;height:34px;padding:0 .8rem;font-size:.8rem}
+nav{display:flex;gap:.4rem;margin:1.3rem 0;overflow-x:auto;padding-bottom:2px}
+nav button{flex:none;background:var(--p);border:1px solid var(--line);color:var(--mut);border-radius:12px;padding:.6rem 1.1rem;font:700 .9rem var(--f);cursor:pointer}
+nav button.on{background:var(--g);color:#04140c;border-color:var(--g)}
+nav i{font-style:normal;background:var(--y);color:#1a1400;border-radius:99px;padding:0 .5rem;margin-left:.45rem;font-size:.74rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;margin-bottom:1.2rem}
+.st{background:linear-gradient(160deg,var(--p2),var(--p));border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;display:flex;gap:.8rem;align-items:center}
+.st .ico{width:42px;height:42px;border-radius:12px;background:rgba(31,229,142,.1);display:grid;place-items:center;font-size:1.2rem}
+.st small{color:var(--mut);display:block;font-size:.78rem}.st b{font-size:1.3rem;color:var(--ink);font-weight:800}
+.seg{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.seg button:not(.b){background:var(--p);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:.45rem 1rem;font:700 .85rem var(--f);cursor:pointer}
+.seg button.on{background:rgba(31,229,142,.12);border-color:var(--g);color:var(--g)}
+.seg em{font-style:normal;opacity:.7;margin-left:.3rem}.seg .b{margin-left:auto;flex:none;height:36px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:.9rem}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{background:var(--p);border:1px solid var(--line);border-radius:16px;padding:1.1rem;display:flex;flex-direction:column;gap:.8rem}
+.oh{display:flex;gap:.75rem;align-items:center}
+.av{width:42px;height:42px;border-radius:50%;background:rgba(31,229,142,.14);color:var(--g);display:grid;place-items:center;font-weight:800;flex:none}
+.oi{flex:1;min-width:0}.oi b{display:block}.oi small,.mut{color:var(--mut);font-size:.8rem}.oi small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pill{border-radius:99px;padding:.18rem .75rem;font-size:.76rem;font-weight:800;white-space:nowrap}
+.pending{background:rgba(255,210,31,.14);color:var(--y)}.paid{background:rgba(31,229,142,.14);color:var(--g)}.rejected{background:rgba(255,107,107,.14);color:var(--r)}
+.items{background:var(--p2);border-radius:10px;padding:.6rem .8rem}
+.it{display:flex;justify-content:space-between;gap:1rem;padding:.2rem 0;font-size:.88rem}
+.tot{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:.7rem}.tot b{color:var(--y);font-size:1.15rem}
+.acts{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:auto}
+.hint{font-size:.78rem;color:var(--mut);background:rgba(255,210,31,.06);border-radius:8px;padding:.45rem .65rem}
+.empty{grid-column:1/-1;text-align:center;color:var(--mut);padding:2.5rem;border:1px dashed var(--line);border-radius:16px}
+h3.gh{margin:1.4rem 0 .7rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--g)}
+.pc{gap:.5rem}.pc.off{opacity:.6}.pt{display:flex;justify-content:space-between;align-items:center}.pid{color:var(--mut);font-size:.75rem}
+.pc h4{margin:.2rem 0 0;font-size:1rem}.pc p{margin:0;color:var(--mut);font-size:.82rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em}
+.pf{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:.5rem}.pf b{font-size:1.15rem;color:var(--y)}
+.stars{color:#ffb400;letter-spacing:2px}.stars s{text-decoration:none;color:#2c3a36}
+.rq{margin:0;background:var(--p2);border-radius:10px;padding:.75rem .9rem;color:#d6e6df;flex:1;overflow-wrap:anywhere}
+label{display:block;font-size:.78rem;color:var(--mut);font-weight:700;margin-bottom:.8rem}
+input,textarea{width:100%;margin-top:.3rem;background:var(--p2);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:.65rem .8rem;font:500 .92rem var(--f)}
 input:focus,textarea:focus{border-color:var(--g);outline:0}
-.g2{display:grid;grid-template-columns:2fr 1fr;gap:.7rem}
-.chk{display:flex;gap:.5rem;align-items:center}.chk input{width:auto;margin:0}
-.msg{min-height:1.2em;font-size:.85rem;color:var(--g)}.msg.e{color:var(--red)}
-.stars{color:#FFB400}
-#login{min-height:100vh;display:grid;place-items:center;padding:1rem}
-.box{width:min(380px,100%);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.6rem}
-.box h1{margin:0 0 .3rem;color:var(--g);font-size:1.3rem}
+.g2{display:grid;grid-template-columns:2fr 1fr;gap:.8rem}.chk{display:flex;gap:.5rem;align-items:center;color:var(--ink)}.chk input{width:auto;margin:0}
+.md{position:fixed;inset:0;background:rgba(0,0,0,.75);display:grid;place-items:center;padding:1rem;z-index:20;overflow:auto}
+.mb{width:min(560px,100%);background:var(--p);border:1px solid var(--line);border-radius:18px;padding:1.3rem}.mb h3{margin:0 0 1rem}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--g);color:#04140c;font-weight:800;padding:.7rem 1.2rem;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:30}
+.toast.show{opacity:1;transform:translate(-50%,0)}.toast.err{background:var(--r);color:#fff}
+#login{min-height:100vh;display:grid;place-items:center;padding:1rem}.box{width:min(390px,100%);background:var(--p);border:1px solid var(--line);border-radius:18px;padding:1.7rem}
+.box h1{margin:0 0 .3rem;color:var(--g);font-size:1.35rem}.lm{min-height:1.2em;color:var(--r);font-size:.85rem}
 [hidden]{display:none!important}
-@media(max-width:600px){.g2{grid-template-columns:1fr}}
+@media(max-width:600px){.g2{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.seg .b{margin-left:0}}
 </style>
 </head>
 <body>
-
-<div id="cfg" hidden class="box" style="margin:3rem auto"><h1>Falta configurar</h1><p class="muted">Preencha SB_URL e SB_KEY no topo do script do admin.html.</p></div>
-
-<div id="login" hidden><div class="box">
-  <h1>Painel Prime Edits</h1><p class="muted">Acesso restrito ao administrador.</p>
-  <label>E-mail<input id="le" type="email" autocomplete="email"></label>
-  <label>Senha<input id="lp" type="password" autocomplete="current-password"></label>
-  <p class="msg e" id="lm"></p><button class="btn" id="lg" style="width:100%;padding:.75rem">Entrar</button>
-</div></div>
+<div id="cfg" hidden class="box" style="margin:3rem auto"><h1>Falta configurar</h1><p class="mut">Preencha SB_URL e SB_KEY no topo do script do admin.html.</p></div>
+<div id="login" hidden><div class="box"><h1>👑 Painel Prime Edits</h1><p class="mut">Acesso restrito ao administrador.</p>
+<label>E-mail<input id="le" type="email" autocomplete="email"></label><label>Senha<input id="lp" type="password" autocomplete="current-password"></label>
+<p class="lm" id="lm"></p><button class="b ok" id="lg" style="width:100%;height:46px">Entrar</button></div></div>
 
 <div id="app" hidden>
-<header><div class="wrap bar"><b>Painel Prime Edits</b><small id="who"></small><button class="btn d s" id="out">Sair</button></div></header>
+<header><div class="wrap bar"><div class="logo">👑 Prime <span>Edits</span></div><span class="who" id="who"></span><button class="b sm" id="out">Sair</button></div></header>
 <main class="wrap">
-  <nav id="tabs"><button data-t="orders" class="on">Pedidos<i id="pc" hidden></i></button><button data-t="clients">Clientes</button><button data-t="reviews">Avaliações</button><button data-t="products">Serviços</button><button data-t="settings">Configurações</button></nav>
-  <section id="orders"></section>
-  <section id="clients" hidden></section>
-  <section id="reviews" hidden></section>
-  <section id="products" hidden></section>
-  <section id="settings" hidden></section>
-</main>
-</div>
+<nav id="tabs"><button data-t="orders" class="on">📦 Pedidos<i id="pc" hidden></i></button><button data-t="clients">👤 Clientes</button><button data-t="reviews">⭐ Avaliações</button><button data-t="products">🛍️ Serviços</button><button data-t="settings">⚙️ Configurações</button></nav>
+<section id="orders"></section><section id="clients" hidden></section><section id="reviews" hidden></section><section id="products" hidden></section><section id="settings" hidden></section>
+</main></div>
+
+<div class="md" id="md" hidden><div class="mb" id="mb"></div></div>
+<div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
 <script>
-/* Cole aqui os MESMOS valores que você colocou na variável SB do seu site (URL e chave "anon public"). */
 var SB_URL="https://anvzihitblrosjlkkzll.supabase.co", SB_KEY="sb_publishable_hQtJfjEvdPFBnVv1wM5Nbg_AA52oICb";
-
-/* Serviços do site: [id, nome, preço, descrição curta] */
-var BASE=[[1,"Edição básica",69.99,"Cortes, trilha e correção de áudio. Até 10 min."],[2,"Edição completa",99.99,"Legendas, motion, efeitos e color grading. Até 10 min."],[3,"Pacote 4 vídeos",350,"Quatro edições completas com preço de pacote."],[4,"Corte único",35,"Um vídeo vertical com legenda animada."],[5,"Pacote 10 cortes",145,"Dez vídeos verticais prontos para postar."],[6,"Pacote 30 cortes",420,"Trinta vídeos verticais com legendas e trilha."],[7,"Vídeo institucional",450,"Apresentação da empresa com locução e identidade visual."],[8,"Comercial com motion",599.99,"Anúncio com animações, trilha e versões para redes."],[9,"Edição de vídeo 30 segundos",49,"Um vídeo de jogo editado, com 30 segundos."],[10,"Edição de 2 vídeos de 30 segundos",55.23,"Dois vídeos de jogo, de 30 segundos cada."],[11,"Vídeo de até 5 minutos",77.99,"Edição de um vídeo de jogo com até 5 minutos."],[12,"Criação de site básico",99.99,"Site simples, moderno e responsivo."],[13,"Site profissional",250,"Site completo com visual profissional e a identidade da sua marca."],[15,"Aplicativo funcional do seu jeito",550,"Aplicativo personalizado, com a sua identidade e as funcionalidades que o seu negócio precisa."],[16,"NIK EXTERNAL SEMANAL",35,"Acesso semanal ao NIK EXTERNAL completo para FiveM."],[17,"NIK EXTERNAL MENSAL",45,"Acesso mensal ao NIK EXTERNAL completo para FiveM."],[18,"NIK EXTERNAL TRIMENSAL",99.99,"Acesso trimestral ao NIK EXTERNAL completo para FiveM."],[19,"NIK EXTERNAL LIFETIME",151.01,"Acesso vitalício ao NIK EXTERNAL completo para FiveM."],[14,"Site master",399.99,"O site mais completo, com recursos avançados."]];
-
+/* [id, nome, preço, descrição curta, categoria] */
+var BASE=[[1,"Edição básica",69.99,"Cortes, trilha e correção de áudio. Até 10 min.","y"],[2,"Edição completa",99.99,"Legendas, motion, efeitos e color grading. Até 10 min.","y"],[3,"Pacote 4 vídeos",350,"Quatro edições completas com preço de pacote.","y"],[4,"Corte único",35,"Um vídeo vertical com legenda animada.","s"],[5,"Pacote 10 cortes",145,"Dez vídeos verticais prontos para postar.","s"],[6,"Pacote 30 cortes",420,"Trinta vídeos verticais com legendas e trilha.","s"],[7,"Vídeo institucional",450,"Apresentação da empresa com locução e identidade visual.","e"],[8,"Comercial com motion",599.99,"Anúncio com animações, trilha e versões para redes.","e"],[9,"Edição de vídeo 30 segundos",49,"Um vídeo de jogo editado, com 30 segundos.","j"],[10,"Edição de 2 vídeos de 30 segundos",55.23,"Dois vídeos de jogo, de 30 segundos cada.","j"],[11,"Vídeo de até 5 minutos",77.99,"Edição de um vídeo de jogo com até 5 minutos.","j"],[12,"Criação de site básico",99.99,"Site simples, moderno e responsivo.","w"],[13,"Site profissional",250,"Site completo com visual profissional e a identidade da sua marca.","w"],[15,"Aplicativo funcional do seu jeito",550,"Aplicativo personalizado, com a sua identidade e as funcionalidades que o seu negócio precisa.","a"],[16,"NIK EXTERNAL SEMANAL",35,"Acesso semanal ao NIK EXTERNAL completo para FiveM.","n"],[17,"NIK EXTERNAL MENSAL",45,"Acesso mensal ao NIK EXTERNAL completo para FiveM.","n"],[18,"NIK EXTERNAL TRIMENSAL",99.99,"Acesso trimestral ao NIK EXTERNAL completo para FiveM.","n"],[19,"NIK EXTERNAL LIFETIME",151.01,"Acesso vitalício ao NIK EXTERNAL completo para FiveM.","n"],[14,"Site master",399.99,"O site mais completo, com recursos avançados.","w"]];
+var CATS={y:"Vídeos para YouTube",s:"Shorts e cortes",e:"Vídeos para empresas",j:"Edição de jogos",w:"Criação de sites",a:"Criação de aplicativo",n:"NIK EXTERNAL (FiveM)"};
+var ST={pending:["Pendente","pending"],paid:["Finalizado","paid"],rejected:["Recusado","rejected"]};
 var $=function(i){return document.getElementById(i)};
 function esc(t){return String(t==null?"":t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function brl(v){return "R$ "+Number(v||0).toFixed(2).replace(".",",")}
 function fdt(t){try{return new Date(t).toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"})}catch(e){return ""}}
-var ST={pending:"Aguardando",paid:"Pago",rejected:"Recusado"};
-var db=null,ORD=[],OF="pending";
+function toast(m,e){var t=$("toast");t.textContent=m;t.className="toast show"+(e?" err":"");clearTimeout(toast.t);toast.t=setTimeout(function(){t.className="toast"},2600)}
+var db=null,ORD=[],OF="pending",PM={};
 
 if(!SB_URL||!SB_KEY){$("cfg").hidden=false}
-else{db=supabase.createClient(SB_URL,SB_KEY);
-  db.auth.getSession().then(function(r){r.data.session?enter(r.data.session.user):($("login").hidden=false)})}
-
+else{db=supabase.createClient(SB_URL,SB_KEY);db.auth.getSession().then(function(r){r.data.session?enter(r.data.session.user):($("login").hidden=false)})}
 $("lg").onclick=function(){var b=this;b.disabled=true;$("lm").textContent="";
-  db.auth.signInWithPassword({email:$("le").value.trim(),password:$("lp").value}).then(function(r){b.disabled=false;
-    if(r.error)return $("lm").textContent="E-mail ou senha incorretos.";enter(r.data.user)})};
+  db.auth.signInWithPassword({email:$("le").value.trim(),password:$("lp").value}).then(function(r){b.disabled=false;if(r.error)return $("lm").textContent="E-mail ou senha incorretos.";enter(r.data.user)})};
 $("lp").addEventListener("keydown",function(e){if(e.key=="Enter")$("lg").click()});
 $("out").onclick=function(){db.auth.signOut().then(function(){location.reload()})};
-
-/* Só entra quem está na tabela "admins" (o banco também bloqueia por RLS) */
 function enter(u){db.from("admins").select("email").then(function(r){
   if(r.error||!r.data||!r.data.length){db.auth.signOut();$("login").hidden=false;$("lm").textContent="Esta conta não tem acesso ao painel.";return}
-  $("login").hidden=true;$("app").hidden=false;$("who").textContent=u.email;loadOrders();loadClients();loadReviews();setInterval(loadOrders,20000);loadProducts();loadSettings()})}
-
+  $("login").hidden=true;$("app").hidden=false;$("who").textContent=u.email;
+  loadOrders();loadClients();loadReviews();loadProducts();loadSettings();setInterval(loadOrders,20000)})}
 $("tabs").onclick=function(e){var t=e.target.closest("button[data-t]");if(!t)return;
   document.querySelectorAll("#tabs button").forEach(function(b){b.classList.toggle("on",b==t)});
   ["orders","clients","reviews","products","settings"].forEach(function(s){$(s).hidden=s!=t.dataset.t})};
+function stat(i,l,v){return '<div class="st"><div class="ico">'+i+'</div><div><small>'+l+'</small><b>'+v+'</b></div></div>'}
+function empty(m){return '<div class="empty">'+m+'</div>'}
 
 /* ===== Pedidos ===== */
 function loadOrders(){db.from("orders").select("*").order("created_at",{ascending:false}).then(function(r){ORD=r.data||[];drawOrders()})}
-function drawOrders(){
-  var pend=ORD.filter(function(o){return o.status=="pending"}),paid=ORD.filter(function(o){return o.status=="paid"});
-  var sum=paid.reduce(function(a,o){return a+Number(o.total)},0),mon=new Date().getMonth(),
-      mes=paid.filter(function(o){return new Date(o.created_at).getMonth()==mon}).reduce(function(a,o){return a+Number(o.total)},0);
-  $("pc").hidden=!pend.length;$("pc").textContent=pend.length;
+function oCard(o){var ph=String(o.phone||"").replace(/\D/g,"").replace(/^55/,""),s=ST[o.status]||ST.pending,nm=o.name||"—";
+  return '<article class="card"><div class="oh"><div class="av">'+esc(nm.charAt(0).toUpperCase())+'</div><div class="oi"><b>#'+o.id+' · '+esc(nm)+'</b><small>'+fdt(o.created_at)+' · '+esc(o.email)+(o.phone?' · '+esc(o.phone):'')+'</small></div><span class="pill '+s[1]+'">'+s[0]+'</span></div>'
+  +'<div class="items">'+(o.items||[]).map(function(i){return '<div class="it"><span>'+esc(i.q)+'x '+esc(i.n)+'</span><b>'+brl(i.p*i.q)+'</b></div>'}).join("")+'</div>'
+  +'<div class="tot"><span class="mut">Total do pedido</span><b>'+brl(o.total)+'</b></div>'
+  +(o.status=="pending"?'<div class="hint">Ao confirmar, o pedido fica <b>Finalizado</b> e a pessoa ganha o cargo CLIENTE (pode avaliar).</div>':'')
+  +'<div class="acts">'+(o.status!="paid"?'<button class="b ok" data-os="paid" data-id="'+o.id+'">✔ Confirmar</button>':'')
+  +(o.status=="pending"?'<button class="b no" data-os="rejected" data-id="'+o.id+'">✖ Recusar</button>':'')
+  +(o.status!="pending"?'<button class="b" data-os="pending" data-id="'+o.id+'">↩ Pendente</button>':'')
+  +(ph?'<a class="b wa" target="_blank" rel="noopener" href="https://wa.me/55'+ph+'">WhatsApp</a>':'')
+  +'<button class="b ic" title="Excluir pedido" data-od="'+o.id+'">🗑</button></div></article>'}
+function drawOrders(){var c=function(s){return ORD.filter(function(o){return o.status==s}).length},paid=ORD.filter(function(o){return o.status=="paid"}),
+  sum=paid.reduce(function(a,o){return a+Number(o.total)},0),m=new Date().getMonth(),
+  mes=paid.filter(function(o){return new Date(o.created_at).getMonth()==m}).reduce(function(a,o){return a+Number(o.total)},0);
+  $("pc").hidden=!c("pending");$("pc").textContent=c("pending");
   var list=ORD.filter(function(o){return OF=="all"||o.status==OF});
-  $("orders").innerHTML='<div class="stats"><div class="st"><small>Aguardando</small><b>'+pend.length+'</b></div><div class="st"><small>Pedidos pagos</small><b>'+paid.length+'</b></div><div class="st"><small>Faturamento total</small><b>'+brl(sum)+'</b></div><div class="st"><small>Neste mês</small><b>'+brl(mes)+'</b></div></div>'
-  +'<div class="row" style="margin-bottom:.8rem"><label style="margin:0;max-width:220px">Mostrar<select id="of">'+[["pending","Aguardando"],["paid","Pagos"],["rejected","Recusados"],["all","Todos"]].map(function(x){return '<option value="'+x[0]+'"'+(x[0]==OF?" selected":"")+'>'+x[1]+'</option>'}).join("")+'</select></label><button class="btn d s" id="ref">Atualizar</button></div>'
-  +(list.length?list.map(function(o){var ph=String(o.phone||"").replace(/\D/g,"");
-    return '<div class="card"><div class="row"><b>#'+o.id+' · '+esc(o.name||"—")+'</b><span class="tag '+o.status+'">'+ST[o.status]+'</span></div><div class="muted">'+fdt(o.created_at)+' · '+esc(o.email)+' · '+esc(o.phone||"")+'</div><div style="margin:.6rem 0">'
-    +(o.items||[]).map(function(i){return '<div class="it"><span>'+i.q+'x '+esc(i.n)+'</span><span>'+brl(i.p*i.q)+'</span></div>'}).join("")+'</div><div class="row"><b style="color:var(--y)">Total '+brl(o.total)+'</b></div><div class="acts">'
-    +(o.status=="pending"?'<span class="muted" style="width:100%">Ao confirmar, esta pessoa ganha o cargo CLIENTE e pode avaliar.</span>':'')
-    +(o.status!="paid"?'<button class="btn" data-os="paid" data-id="'+o.id+'">✔ CONFIRMAR</button>':'')
-    +(o.status!="rejected"?'<button class="btn r" data-os="rejected" data-id="'+o.id+'">✖ RECUSAR</button>':'')
-    +(o.status!="pending"?'<button class="btn d s" data-os="pending" data-id="'+o.id+'">Voltar p/ aguardando</button>':'')
-    +(ph?'<a class="btn d s" target="_blank" rel="noopener" href="https://wa.me/55'+ph.replace(/^55/,"")+'">WhatsApp</a>':'')
-    +'<button class="btn r s" data-od="'+o.id+'">Excluir</button></div></div>'}).join(""):'<p class="muted">Nenhum pedido aqui.</p>');
-  $("of").onchange=function(){OF=this.value;drawOrders()};$("ref").onclick=loadOrders}
+  $("orders").innerHTML='<div class="stats">'+stat("⏳","Pendentes",c("pending"))+stat("✅","Finalizados",c("paid"))+stat("💰","Faturamento total",brl(sum))+stat("📅","Neste mês",brl(mes))+'</div>'
+  +'<div class="seg">'+[["pending","Pendentes"],["paid","Finalizados"],["rejected","Recusados"],["all","Todos"]].map(function(x){return '<button data-of="'+x[0]+'" class="'+(x[0]==OF?"on":"")+'">'+x[1]+'<em>'+(x[0]=="all"?ORD.length:c(x[0]))+'</em></button>'}).join("")+'<button class="b" id="ref">↻ Atualizar</button></div>'
+  +'<div class="grid2">'+(list.length?list.map(oCard).join(""):empty("Nenhum pedido aqui."))+'</div>'}
 $("orders").onclick=function(e){var b=e.target.closest("button");if(!b)return;
-  if(b.dataset.os)db.from("orders").update({status:b.dataset.os}).eq("id",b.dataset.id).then(function(r){if(r.error)alert("Erro: "+r.error.message);loadOrders();loadClients()});
-  if(b.dataset.od&&confirm("Excluir este pedido para sempre?"))db.from("orders").delete().eq("id",b.dataset.od).then(loadOrders)};
+  if(b.dataset.of){OF=b.dataset.of;drawOrders()}
+  else if(b.id=="ref"){loadOrders();toast("Atualizado")}
+  else if(b.dataset.os)db.from("orders").update({status:b.dataset.os}).eq("id",b.dataset.id).then(function(r){if(r.error)return toast("Erro: "+r.error.message,1);toast(b.dataset.os=="paid"?"Pedido finalizado ✓":"Status atualizado");loadOrders();loadClients()});
+  else if(b.dataset.od&&confirm("Excluir este pedido para sempre?"))db.from("orders").delete().eq("id",b.dataset.od).then(function(){toast("Pedido excluído");loadOrders();loadClients()})};
 
-/* ===== Clientes (cargo CLIENTE = pode avaliar) ===== */
+/* ===== Clientes ===== */
 function loadClients(){db.from("clientes").select("*").order("since",{ascending:false}).then(function(r){var L=r.data||[];
-  $("clients").innerHTML='<p class="muted">Quem tem o cargo CLIENTE pode publicar avaliação no site. O cargo é dado ao confirmar um pedido.</p>'+(r.error?'<p class="msg e">Rode o arquivo atualizacao.sql no Supabase.</p>':L.length?L.map(function(x){return '<div class="card"><div class="row"><b>'+esc(x.name||"—")+' <span class="tag paid">CLIENTE</span></b><span class="muted">desde '+fdt(x.since)+'</span></div><div class="muted">'+esc(x.email)+'</div><div class="acts"><button class="btn r s" data-rc="'+x.user_id+'">Remover cargo</button></div></div>'}).join(""):'<p class="muted">Nenhum cliente confirmado ainda.</p>')})}
-$("clients").onclick=function(e){var b=e.target.closest("[data-rc]");if(b&&confirm("Remover o cargo de cliente? A pessoa não poderá mais avaliar."))db.from("clientes").delete().eq("user_id",b.dataset.rc).then(loadClients)};
+  $("clients").innerHTML='<p class="mut">Quem tem o cargo CLIENTE pode avaliar (uma avaliação por pedido finalizado). O cargo é dado ao finalizar um pedido.</p>'
+  +(r.error?empty("Rode o arquivo supabase-tudo.sql no Supabase."):'<div class="grid3">'+(L.length?L.map(function(x){return '<article class="card"><div class="oh"><div class="av">'+esc((x.name||"?").charAt(0).toUpperCase())+'</div><div class="oi"><b>'+esc(x.name||"—")+'</b><small>'+esc(x.email)+'</small></div></div><div class="mut">Cliente desde '+fdt(x.since)+'</div><div class="acts"><span class="pill paid">CLIENTE</span><button class="b no sm" style="margin-left:auto" data-rc="'+x.user_id+'">Remover cargo</button></div></article>'}).join(""):empty("Nenhum cliente ainda."))+'</div>')})}
+$("clients").onclick=function(e){var b=e.target.closest("[data-rc]");if(b&&confirm("Remover o cargo de cliente?"))db.from("clientes").delete().eq("user_id",b.dataset.rc).then(function(){toast("Cargo removido");loadClients()})};
 
 /* ===== Avaliações ===== */
-function loadReviews(){db.from("reviews").select("*").order("created_at",{ascending:false}).then(function(r){var L=r.data||[];
-  $("reviews").innerHTML=L.length?L.map(function(x){return '<div class="card"><div class="row"><span class="stars">'+"★".repeat(x.stars)+'<span style="color:#3a3a3a">'+"★".repeat(5-x.stars)+'</span></span><span class="muted">'+esc(x.name)+' · '+fdt(x.created_at)+'</span></div><p style="margin:.5rem 0">'+esc(x.text)+'</p><button class="btn r s" data-rd="'+x.id+'">Excluir avaliação</button></div>'}).join(""):'<p class="muted">Nenhuma avaliação ainda.</p>'})}
-$("reviews").onclick=function(e){var b=e.target.closest("[data-rd]");if(b&&confirm("Excluir esta avaliação?"))db.from("reviews").delete().eq("id",b.dataset.rd).then(loadReviews)};
+function loadReviews(){db.from("reviews").select("*").order("created_at",{ascending:false}).then(function(r){var L=r.data||[],n=L.length,avg=n?L.reduce(function(a,x){return a+x.stars},0)/n:0;
+  $("reviews").innerHTML='<div class="stats">'+stat("⭐","Média",avg.toFixed(1).replace(".",","))+stat("💬","Avaliações",n)+stat("🏆","5 estrelas",L.filter(function(x){return x.stars==5}).length)+'</div>'
+  +'<div class="grid2">'+(n?L.map(function(x){return '<article class="card"><div class="oh"><div class="av">'+esc((x.name||"?").charAt(0).toUpperCase())+'</div><div class="oi"><b>'+esc(x.name)+'</b><small>'+fdt(x.created_at)+(x.order_id?' · Pedido #'+x.order_id:'')+'</small></div><span class="stars">'+"★".repeat(x.stars)+'<s>'+"★".repeat(5-x.stars)+'</s></span></div><p class="rq">“'+esc(x.text)+'”</p><div class="acts"><button class="b no sm" data-rd="'+x.id+'">🗑 Excluir avaliação</button></div></article>'}).join(""):empty("Nenhuma avaliação ainda."))+'</div>'})}
+$("reviews").onclick=function(e){var b=e.target.closest("[data-rd]");if(b&&confirm("Excluir esta avaliação?"))db.from("reviews").delete().eq("id",b.dataset.rd).then(function(){toast("Avaliação excluída");loadReviews()})};
 
-/* ===== Serviços ===== */
-function loadProducts(){db.from("products").select("*").then(function(r){var m={};(r.data||[]).forEach(function(x){m[x.id]=x});
-  $("products").innerHTML='<p class="muted">Edite nome, preço e descrição. Desmarque “Ativo” para esconder o serviço do site.</p>'+BASE.map(function(b){var x=m[b[0]]||{};
-  var on=x.active!==false;return '<div class="card" data-pid="'+b[0]+'"><div class="g2"><label>Nome<input data-f="name" value="'+esc(x.name||b[1])+'"></label><label>Preço (R$)<input data-f="price" type="number" step="0.01" min="0" value="'+(x.price!=null?x.price:b[2])+'"></label></div><label>Descrição curta (card)<input data-f="short" value="'+esc(x.short||b[3])+'"></label><label>Descrição completa (opcional, substitui a do site)<textarea data-f="full" rows="3">'+esc(x.full||"")+'</textarea></label><div class="row"><label class="chk" style="margin:0"><input type="checkbox" data-f="active"'+(on?" checked":"")+'>Ativo no site</label><span><span class="msg"></span> <button class="btn s" data-sp>Salvar</button></span></div></div>'}).join("")})}
-$("products").onclick=function(e){var b=e.target.closest("[data-sp]");if(!b)return;var c=b.closest(".card"),g=function(f){return c.querySelector('[data-f="'+f+'"]')},m=c.querySelector(".msg");
-  var row={id:+c.dataset.pid,name:g("name").value.trim(),price:+g("price").value,short:g("short").value.trim(),full:g("full").value.trim()||null,active:g("active").checked};
-  b.disabled=true;db.from("products").upsert(row).then(function(r){b.disabled=false;m.className="msg"+(r.error?" e":"");m.textContent=r.error?("Erro ao salvar: "+(r.error.message||r.error.details||r.error.code||"falha desconhecida")):"Salvo ✓";setTimeout(function(){m.textContent=""},2500)})};
+/* ===== Serviços (cards + janela de edição) ===== */
+function cur(b){var x=PM[b[0]]||{};return {id:b[0],name:x.name||b[1],price:x.price!=null?x.price:b[2],short:x.short||b[3],full:x.full||"",active:x.active!==false}}
+function loadProducts(){db.from("products").select("*").then(function(r){PM={};(r.data||[]).forEach(function(x){PM[x.id]=x});drawProducts()})}
+function drawProducts(){var h='<p class="mut">Clique em Editar para mudar nome, preço e descrição. Serviços “Ocultos” não aparecem no site.</p>';
+  Object.keys(CATS).forEach(function(k){var L=BASE.filter(function(b){return b[4]==k});if(!L.length)return;
+    h+='<h3 class="gh">'+CATS[k]+'</h3><div class="grid3">'+L.map(function(b){var p=cur(b);
+      return '<article class="card pc'+(p.active?'':' off')+'"><div class="pt"><span class="pill '+(p.active?'paid':'rejected')+'">'+(p.active?'Ativo':'Oculto')+'</span><span class="pid">#'+p.id+'</span></div><h4>'+esc(p.name)+'</h4><p>'+esc(p.short)+'</p><div class="pf"><b>'+brl(p.price)+'</b><button class="b sm" data-ed="'+p.id+'">✎ Editar</button></div></article>'}).join("")+'</div>'});
+  $("products").innerHTML=h}
+function closeM(){$("md").hidden=true}
+$("md").onclick=function(e){if(e.target.id=="md"||e.target.dataset.x)closeM()};
+addEventListener("keydown",function(e){if(e.key=="Escape")closeM()});
+$("products").onclick=function(e){var b=e.target.closest("[data-ed]");if(!b)return;var id=+b.dataset.ed,bs=BASE.filter(function(x){return x[0]==id})[0],p=cur(bs);
+  $("mb").innerHTML='<h3>✎ Editar serviço #'+id+'</h3><div class="g2"><label>Nome<input id="fn" value="'+esc(p.name)+'"></label><label>Preço (R$)<input id="fp" inputmode="decimal" value="'+p.price+'"></label></div><label>Descrição curta (aparece no card)<input id="fs" value="'+esc(p.short)+'"></label><label>Descrição completa (opcional, substitui a do site)<textarea id="ff" rows="5">'+esc(p.full)+'</textarea></label>'
+  +'<label class="chk"><input type="checkbox" id="fa"'+(p.active?" checked":"")+'>Ativo no site</label><div class="acts"><button class="b" data-x="1">Cancelar</button><button class="b ok" id="fsv">Salvar</button></div>';
+  $("md").hidden=false;
+  $("fsv").onclick=function(){var s=this,row={id:id,name:$("fn").value.trim(),price:parseFloat(String($("fp").value).replace(",",".")),short:$("fs").value.trim(),full:$("ff").value.trim()||null,active:$("fa").checked};
+    if(!row.name||isNaN(row.price))return toast("Preencha nome e preço",1);s.disabled=true;
+    db.from("products").upsert(row).then(function(r){s.disabled=false;if(r.error)return toast("Erro ao salvar",1);PM[id]=row;closeM();drawProducts();toast("Serviço salvo ✓")})}};
 
 /* ===== Configurações ===== */
 var CF=[["pix_key","Chave PIX","SUA CHAVE PIX"],["pix_name","Nome do recebedor PIX (sem acento, até 25 letras)",""],["pix_city","Cidade do PIX (até 15 letras)",""],["whatsapp","WhatsApp com DDI e DDD (só números)","5541995403405"],["discord","Link do Discord","https://discord.gg/..."],["hero_sub","Frase abaixo do logo na página inicial",""]];
 function loadSettings(){db.from("settings").select("*").then(function(r){var c={};(r.data||[]).forEach(function(x){c[x.key]=x.value});
-  $("settings").innerHTML='<div class="card"><p class="muted" style="margin-top:0">Campos em branco continuam usando o valor que já está no site.</p>'+CF.map(function(f){return '<label>'+f[1]+'<input data-k="'+f[0]+'" placeholder="'+esc(f[2])+'" value="'+esc(c[f[0]]||"")+'"></label>'}).join("")+'<span class="msg" id="sm"></span> <button class="btn" id="ss">Salvar configurações</button></div>'})}
+  $("settings").innerHTML='<div class="card" style="max-width:640px"><p class="mut" style="margin:0">Campos em branco continuam usando o valor que já está no site.</p>'+CF.map(function(f){return '<label>'+f[1]+'<input data-k="'+f[0]+'" placeholder="'+esc(f[2])+'" value="'+esc(c[f[0]]||"")+'"></label>'}).join("")+'<div class="acts"><button class="b ok" id="ss" style="flex:none">Salvar configurações</button></div></div>'})}
 $("settings").onclick=function(e){if(e.target.id!="ss")return;var rows=[],del=[];
   document.querySelectorAll("[data-k]").forEach(function(i){var v=i.value.trim();v?rows.push({key:i.dataset.k,value:v}):del.push(i.dataset.k)});
-  Promise.all([db.from("settings").upsert(rows),del.length?db.from("settings").delete().in("key",del):null]).then(function(r){var er=r[0].error;
-    $("sm").className="msg"+(er?" e":"");$("sm").textContent=er?"Erro ao salvar":"Salvo ✓";setTimeout(function(){$("sm").textContent=""},2500)})};
+  Promise.all([db.from("settings").upsert(rows),del.length?db.from("settings").delete().in("key",del):null]).then(function(r){r[0].error?toast("Erro ao salvar",1):toast("Configurações salvas ✓")})};
 </script>
 </body>
 </html>

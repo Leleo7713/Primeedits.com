@@ -346,7 +346,7 @@ footer{margin-top:4rem;border-top:1px solid var(--line);padding:2.5rem 0 2rem;co
   <section id="como" style="margin-top:4rem"><span class="tab">Como comprar</span>
     <ol class="how"><li><b>1. Escolha</b>o serviço e adicione ao carrinho.</li><li><b>2. Pague no PIX</b>com o QR Code ou o código copia e cola.</li><li><b>3. Envie o pedido</b>depois do pagamento, o contato aparece para você mandar os arquivos e o comprovante.</li></ol></section>
   <section id="avaliacoes"><span class="tab">Avaliações</span>
-    <div id="revwall" class="revform"><b>Somente clientes com compra confirmada podem avaliar.</b><p style="color:var(--muted);font-size:.85rem;margin:.4rem 0 0">Depois que a nossa equipe confirmar o seu pagamento, você poderá deixar a sua avaliação aqui.</p></div>
+    <div id="revwall" class="revform"><b>Somente clientes com compra confirmada podem avaliar.</b><p style="color:var(--muted);font-size:.85rem;margin:.4rem 0 0">Depois que a nossa equipe confirmar o seu pagamento, você poderá deixar a sua avaliação aqui. Cada pedido finalizado vale uma avaliação.</p></div>
     <div id="revform" class="revform" hidden><b>Deixe sua avaliação</b><div class="rs" role="group" aria-label="Nota"><button data-rs="1" aria-label="1 estrela">★</button><button data-rs="2" aria-label="2 estrelas">★</button><button data-rs="3" aria-label="3 estrelas">★</button><button data-rs="4" aria-label="4 estrelas">★</button><button data-rs="5" aria-label="5 estrelas">★</button></div><textarea id="revtxt" class="inp" rows="3" maxlength="400" placeholder="Conte como foi a sua experiência"></textarea><p id="revmsg" class="aerr" role="alert"></p><button class="addb" id="revbtn" style="padding:.65rem 1.3rem;font-size:.9rem">Publicar avaliação</button></div>
     <p id="revempty" style="color:var(--muted)">Por enquanto nenhuma avaliação.</p>
     <div id="revlist"></div>
@@ -375,7 +375,7 @@ footer{margin-top:4rem;border-top:1px solid var(--line);padding:2.5rem 0 2rem;co
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
 <script>
 var WA="5541995403405"; /* número do WhatsApp com DDI e DDD */
-var SB={url:"https://anvzihitblrosjlkkzll.supabase.co",key:"sb_publishable_hQtJfjEvdPFBnVv1wM5Nbg_AA52oICb"};
+var SB={url:"https://anvzihitblrosjlkkzll.supabase.co",key:"sb_publishable_hQtJfjEvdPFBnVv1wM5Nbg_AA52oICb"}; /* cole aqui a URL e a chave "anon public" do seu projeto Supabase (veja o LEIA-ME) */
 var SBC=null;try{if(SB.url&&SB.key&&window.supabase)SBC=supabase.createClient(SB.url,SB.key)}catch(e){}
 var UID=null,UMADE=0,HASPAID=false,REV=[],RV=0;
 var CATS=[{id:"youtube",t:"YouTube"},{id:"shorts",t:"Shorts e Reels"},{id:"empresas",t:"Empresas e anúncios"},{id:"jogos",t:"Edição de vídeos de jogos"},{id:"apps",t:"Criação de aplicativo"},{id:"nik",t:"NIK EXTERNAL FiveM"},{id:"sites",t:"Criação de sites"}];
@@ -552,19 +552,20 @@ document.getElementById("revform").hidden=!HASPAID;document.getElementById("revw
 function loadReviews(){
 if(SBC){SBC.from("reviews").select("*").order("created_at",{ascending:false}).then(function(r){REV=(r.data||[]).map(function(x){return {id:x.id,t:Date.parse(x.created_at),s:x.stars,x:x.text,n:x.name,own:!!UID&&x.user_id==UID}});renderRev()})}
 else{REV=ls("pe_reviews",[]).slice().reverse().map(function(x){x.own=!!ME&&x.e==ME;return x});renderRev()}}
+var FREE=null;
 function checkPaid(){
-if(SBC){if(!UID){HASPAID=false;return renderRev()}SBC.from("orders").select("id").eq("user_id",UID).eq("status","paid").limit(1).then(function(r){HASPAID=!!(r.data&&r.data.length);renderRev()})}
+if(SBC){if(!UID){HASPAID=false;FREE=null;return renderRev()}Promise.all([SBC.from("orders").select("id").eq("user_id",UID).eq("status","paid").order("id"),SBC.from("reviews").select("order_id").eq("user_id",UID)]).then(function(a){var used=(a[1].data||[]).map(function(x){return x.order_id}),f=(a[0].data||[]).filter(function(o){return used.indexOf(o.id)<0})[0];FREE=f?f.id:null;HASPAID=!!f;renderRev()})}
 else{HASPAID=!!(ls("pe_orders",{})[ME]||[]).length;renderRev()}}
 function postRev(){var t=document.getElementById("revtxt").value.trim(),m=document.getElementById("revmsg");
 if(!RV){m.textContent="Escolha de 1 a 5 estrelas.";return}
 if(t.length<5){m.textContent="Escreva um comentário.";return}
 m.textContent="";
-function done(){document.getElementById("revtxt").value="";RV=0;paintStars();m.textContent="Avaliação publicada! Obrigado.";loadReviews()}
-if(SBC){SBC.from("reviews").insert({user_id:UID,name:eName(ME),stars:RV,text:t.slice(0,400)}).then(function(r){if(r.error){m.textContent=r.error.code=="23505"?"Você já publicou uma avaliação. Exclua a anterior para enviar outra.":"Não foi possível publicar. Só clientes com compra confirmada podem avaliar.";return}done()})}
+function done(){document.getElementById("revtxt").value="";RV=0;paintStars();m.textContent="Avaliação publicada! Obrigado.";loadReviews();checkPaid()}
+if(SBC){SBC.from("reviews").insert({user_id:UID,order_id:FREE,name:eName(ME),stars:RV,text:t.slice(0,400)}).then(function(r){if(r.error){m.textContent=r.error.code=="23505"?"Este pedido já foi avaliado.":"Não foi possível publicar. Só clientes com compra confirmada podem avaliar.";return}done()})}
 else{var L=ls("pe_reviews",[]);L.push({id:Date.now(),t:Date.now(),s:RV,x:t.slice(0,400),e:ME,n:eName(ME)});lw("pe_reviews",L);done()}}
 document.addEventListener("click",function(e){var t=e.target.closest("[data-rs],[data-rd]");if(!t)return;
 if(t.dataset.rs){RV=+t.dataset.rs;paintStars()}
-else if(t.dataset.rd){var id=t.dataset.rd;if(SBC)SBC.from("reviews").delete().eq("id",id).then(loadReviews);else{lw("pe_reviews",ls("pe_reviews",[]).filter(function(x){return x.id!=id}));loadReviews()}}});
+else if(t.dataset.rd){var id=t.dataset.rd;if(SBC)SBC.from("reviews").delete().eq("id",id).then(function(){loadReviews();checkPaid()});else{lw("pe_reviews",ls("pe_reviews",[]).filter(function(x){return x.id!=id}));loadReviews()}}});
 document.getElementById("revbtn").onclick=postRev;
 
 /* ===== Servidor (Supabase) e conta ===== */
@@ -587,7 +588,7 @@ return Promise.resolve((ls("pe_orders",{})[ME]||[]).slice().reverse().map(functi
 function saveOrder(items,total,cust){if(!ME||!items)return null;
 if(SBC)return SBC.auth.getUser().then(function(r){var u=r.data.user;return SBC.from("orders").insert({user_id:u.id,email:u.email,name:cust&&cust.name,phone:cust&&cust.phone,items:items,total:total}).select("id").single()}).then(function(r){if(r.error)throw r.error;return r.data.id});
 var all=ls("pe_orders",{}),id="T"+String(Date.now()).slice(-5);(all[ME]=all[ME]||[]).push({id:id,t:Date.now(),items:items,total:total,c:cust,st:"pending"});lw("pe_orders",all);HASPAID=true;renderRev();return id}
-var ST={pending:["Aguardando aprovação","chip2 pend"],paid:["Pago ✓","chip2"],rejected:["Recusado","chip2 rej"]};
+var ST={pending:["Pendente","chip2 pend"],paid:["Finalizado ✓","chip2"],rejected:["Recusado","chip2 rej"]};
 function showAcct(){open(false);var v=document.getElementById("prod");
 v.innerHTML='<p style="padding:2rem 0;color:var(--muted)">Carregando…</p>';document.getElementById("home").hidden=true;v.hidden=false;scrollTo(0,0);
 myOrders().then(function(os){var u=ls("pe_users",{})[ME]||{},paid=os.filter(function(o){return o.st=="paid"}).reduce(function(a,o){return a+o.total},0);
@@ -606,7 +607,7 @@ document.getElementById("pcopy").onclick=function(){var t=document.getElementByI
 document.getElementById("paid").onclick=function(){var d=this;d.disabled=true;d.textContent="Registrando pedido…";
 Promise.resolve(saveOrder(items,total,cust)).then(function(id){var num="+"+WA.slice(0,2)+" "+WA.slice(2,4)+" "+WA.slice(4,9)+"-"+WA.slice(9);
 var wm="Olá! Acabei de pagar via PIX e vou enviar o comprovante.\n"+(id?"Pedido #"+id+"\n":"")+(cust?"Nome: "+cust.name+"\nE-mail: "+cust.email+"\nTelefone: "+cust.phone+"\n":"")+"Meu pedido:\n"+msg;
-b.innerHTML='<h2 id="payT">Pagamento informado</h2>'+(id?'<div class="amt" style="font-size:1.3rem">Pedido #'+esc(id)+'</div>':'')+'<p style="color:var(--muted)">Agora envie o seu pedido e o comprovante do PIX para a nossa equipe começar os trabalhos.</p><div class="num">'+num+'</div><p style="color:var(--muted);font-size:.8rem;margin:0 0 .4rem">Seu pedido foi salvo em Conta › Produtos adquiridos'+(SBC?'. Quando a nossa equipe confirmar o pagamento, o status muda para Pago.':'.')+'</p><a class="btn" target="_blank" rel="noopener" href="https://wa.me/'+WA+'?text='+encodeURIComponent(wm)+'">Enviar pedido no WhatsApp</a>';
+b.innerHTML='<h2 id="payT">Pagamento informado</h2>'+(id?'<div class="amt" style="font-size:1.3rem">Pedido #'+esc(id)+'</div>':'')+'<p style="color:var(--muted)">Agora envie o seu pedido e o comprovante do PIX para a nossa equipe começar os trabalhos.</p><div class="num">'+num+'</div><p style="color:var(--muted);font-size:.8rem;margin:0 0 .4rem">Seu pedido foi salvo em Conta › Produtos adquiridos'+(SBC?'. Quando a nossa equipe confirmar o pagamento, o status muda para Finalizado.':'.')+'</p><a class="btn" target="_blank" rel="noopener" href="https://wa.me/'+WA+'?text='+encodeURIComponent(wm)+'">Enviar pedido no WhatsApp</a>';
 if(fromCart){cart={};upd();renderCkSide()}}).catch(function(){d.disabled=false;d.textContent="Já paguei";document.getElementById("perr").textContent="Não foi possível registrar o pedido. Tente de novo."})};
 document.getElementById("pay").hidden=false}
 
